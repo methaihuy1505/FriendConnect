@@ -22,5 +22,7 @@ jobs:
           local-dir: './'                          
           server-dir: '/htdocs/'     
           exclude: |
+            .git/**
+            .github/**
             html/**
             site/public/vendor/**
