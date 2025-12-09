@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Profile Setup</title>
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../vendor/jquery-3.5.1.min.js"></script>
+    <script src="../vendor/popper.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/script.js"></script>
+  </head>
+  <body class="profile-form">
+    <div class="container mt-5">
+      <h2 class="mb-4">Chuẩn bị hồ sơ</h2>
+      <form
+        id="userRegistrationForm"
+        action="register.php"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <!-- Tên -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Tên</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Nhập tên của bạn"
+            required
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Email của bạn"
+            required
+          />
+        </div>
+
+        <!-- Ngày sinh -->
+        <div class="mb-3">
+          <label class="form-label">Ngày sinh</label>
+          <div class="d-flex gap-2">
+            <select class="form-select" name="birthMonth" required>
+              <option value="">Tháng</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <!-- ... -->
+            </select>
+            <select class="form-select" name="birthDay" required>
+              <option value="">Ngày</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <!-- ... -->
+            </select>
+            <select class="form-select" name="birthYear" required>
+              <option value="">Năm</option>
+              <option>2001</option>
+              <option>2002</option>
+              <option>2003</option>
+              <!-- ... -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Giới tính -->
+        <div class="mb-3">
+          <label class="form-label">Giới tính</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="man"
+              value="man"
+              required
+            />
+            <label class="form-check-label" for="man">Nam</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="woman"
+              value="woman"
+            />
+            <label class="form-check-label" for="woman">Nữ</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="more"
+              value="more"
+            />
+            <label class="form-check-label" for="more">Khác</label>
+          </div>
+          <div class="form-check mt-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="showGender"
+              name="showGender"
+            />
+            <label class="form-check-label" for="showGender"
+              >Hiển thị giới tính trên hồ sơ</label
+            >
+          </div>
+        </div>
+
+        <!-- Quan tâm đến -->
+        <div class="mb-3">
+          <label class="form-label">Quan tâm đến</label>
+          <select class="form-select" name="interestedIn" required>
+            <option value="">Chọn</option>
+            <option value="men">Nam</option>
+            <option value="women">Nữ</option>
+            <option value="everyone">Mọi người</option>
+          </select>
+        </div>
+
+        <!-- Tìm kiếm -->
+        <div class="mb-3">
+          <label class="form-label">Tìm kiếm</label>
+          <select class="form-select" name="relationshipIntent" required>
+            <option value="friends">Bạn mới</option>
+            <option value="serious">Mối quan hệ nghiêm túc</option>
+            <option value="unsure">Không xác định</option>
+          </select>
+        </div>
+
+        <!-- Ảnh đại diện -->
+        <div class="mb-3">
+          <label class="form-label">Ảnh đại diện</label>
+          <input
+            type="file"
+            class="form-control"
+            name="profilePhotos"
+            accept="image/*"
+            required
+          />
+          <small class="text-muted">Phải tải lên 1 ảnh</small>
+        </div>
+
+        <!-- Sở thích -->
+        <div class="mb-3">
+          <label for="interests" class="form-label">Sở thích</label>
+          <select
+            id="interests"
+            name="interests[]"
+            class="form-select"
+            multiple
+          >
+            <option value="travel">Du lịch</option>
+            <option value="music">Âm nhạc</option>
+            <option value="movies">Phim ảnh</option>
+            <option value="fitness">Gym & Fitness</option>
+            <option value="foodie">Ăn uống</option>
+            <option value="gaming">Game</option>
+            <option value="reading">Đọc sách</option>
+            <option value="outdoors">Hoạt động ngoài trời</option>
+            <option value="art">Nghệ thuật</option>
+            <option value="pets">Thú cưng</option>
+          </select>
+          <div class="form-text">
+            Giữ Ctrl (Windows) hoặc Cmd (Mac) để chọn nhiều.
+          </div>
+        </div>
+
+        <!-- Xu hướng tính dục -->
+        <div class="mb-3">
+          <label for="orientation" class="form-label">Xu hướng tính dục</label>
+          <select
+            id="orientation"
+            name="orientation"
+            class="form-select"
+            required
+          >
+            <option value="">Chọn một mục</option>
+            <option value="straight">Straight (Thẳng)</option>
+            <option value="gay">Gay</option>
+            <option value="lesbian">Lesbian</option>
+            <option value="bisexual">Bisexual</option>
+            <option value="prefer_not_to_say">Không muốn tiết lộ</option>
+            <option value="other">Khác</option>
+          </select>
+        </div>
+        <!-- Mật khẩu -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Mật khẩu</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Nhập mật khẩu"
+            required
+          />
+        </div>
+
+        <!-- Xác nhận mật khẩu -->
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label"
+            >Xác nhận mật khẩu</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Nhập lại mật khẩu"
+            required
+          />
+        </div>
+        <div id="formErrors" class="text-danger mb-3"></div>
+        <button type="submit" class="btn btn-primary">Tiếp tục</button>
+      </form>
+    </div>
+  </body>
+</html>

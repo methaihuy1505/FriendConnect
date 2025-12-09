@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Profile</title>
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../vendor/jquery-3.5.1.min.js"></script>
+    <script src="../vendor/popper.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body class="profile-page">
+    <div class="container mt-5">
+      <div class="card shadow-lg p-4">
+        <div class="row">
+          <!-- Avatar -->
+          <div class="col-md-4 text-center">
+            <img
+              id="profileAvatar"
+              src="https://source.unsplash.com/random/300x300?person"
+              alt="Avatar"
+              class="rounded-circle mb-3"
+              style="width: 200px; height: 200px; object-fit: cover"
+            />
+            <h3 id="profileName">Tên người dùng</h3>
+            <p id="profileAge">Tuổi: --</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+              <button class="btn btn-outline-primary">Theo dõi</button>
+              <a id="challengeBtn" href="#" class="btn btn-challenge"
+                >Thử thách</a
+              >
+            </div>
+          </div>
+
+          <!-- Thông tin chi tiết -->
+          <div class="col-md-8">
+            <h4>Thông tin cá nhân</h4>
+            <ul class="list-group mb-3">
+              <li class="list-group-item">
+                <strong>Email:</strong> <span id="profileEmail">---</span>
+              </li>
+              <li class="list-group-item">
+                <strong>Giới tính:</strong> <span id="profileGender">---</span>
+              </li>
+              <li class="list-group-item">
+                <strong>Xu hướng tính dục:</strong>
+                <span id="profileOrientation">---</span>
+              </li>
+              <li class="list-group-item">
+                <strong>Quan tâm đến:</strong>
+                <span id="profileInterested">---</span>
+              </li>
+              <li class="list-group-item">
+                <strong>Tìm kiếm:</strong> <span id="profileIntent">---</span>
+              </li>
+            </ul>
+
+            <h4>Sở thích</h4>
+            <div id="profileInterests" class="d-flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Giả lập dữ liệu người dùng
+      const users = {
+        lan: {
+          name: "Lan",
+          age: 21,
+          email: "lan@example.com",
+          gender: "Nữ",
+          orientation: "Straight",
+          interested: "Nam",
+          intent: "Mối quan hệ nghiêm túc",
+          interests: ["Âm nhạc", "Du lịch", "Phim ảnh"],
+          avatar: "https://source.unsplash.com/random/300x300?woman",
+        },
+        tuan: {
+          name: "Tuấn",
+          age: 22,
+          email: "tuan@example.com",
+          gender: "Nam",
+          orientation: "Gay",
+          interested: "Nam",
+          intent: "Bạn mới",
+          interests: ["Game", "Thể thao", "Gym"],
+          avatar: "https://source.unsplash.com/random/300x300?man",
+        },
+      };
+
+      // Lấy tham số ?user=...
+      const params = new URLSearchParams(window.location.search);
+      const userKey = params.get("user");
+
+      if (userKey && users[userKey]) {
+        const u = users[userKey];
+        document.getElementById("profileName").textContent = u.name;
+        document.getElementById("profileAge").textContent = "Tuổi: " + u.age;
+        document.getElementById("profileEmail").textContent = u.email;
+        document.getElementById("profileGender").textContent = u.gender;
+        document.getElementById("profileOrientation").textContent =
+          u.orientation;
+        document.getElementById("profileInterested").textContent = u.interested;
+        document.getElementById("profileIntent").textContent = u.intent;
+        document.getElementById("profileAvatar").src = u.avatar;
+        document.getElementById("challengeBtn").href =
+          "challenge.html?user=" + userKey;
+
+        // Render sở thích
+        const interestsDiv = document.getElementById("profileInterests");
+        u.interests.forEach((i) => {
+          const badge = document.createElement("span");
+          badge.className = "badge bg-secondary";
+          badge.textContent = i;
+          interestsDiv.appendChild(badge);
+        });
+      }
+    </script>
+  </body>
+</html>
