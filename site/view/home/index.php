@@ -4,11 +4,16 @@
     <div class="hero">
 
         <h1>Chào mừng đến với ứng dụng kết nối</h1>
+        <?php if (! empty($_SESSION["user_id"])) {?>
+        <a href="?c=dashboard" class="btn btn-create">+ Kết nối ngay</a>
+        <?php } else {?>
         <p>Tạo tài khoản để bắt đầu hành trình của bạn</p>
+
         <a href="?c=auth&a=profileSetup" class="btn btn-create">+ Tạo tài khoản</a>
         <a href="#" class="btn btn-create" data-toggle="modal" data-target="#loginModal">
             + Đăng nhập
         </a>
+        <?php }?>
 
         <div class="profile-cards mt-5">
             <?php if (! empty($users)): ?>
