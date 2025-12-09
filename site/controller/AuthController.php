@@ -22,8 +22,8 @@ class AuthController
                 header("Location: index.php?c=dashboard");
                 exit;
             } else {
-                $_SESSION['login_error'] = "Sai email hoặc mật khẩu"+$passwordHash;
-                header("Location: index.php#authModal");
+                $_SESSION['login_error'] = "Sai email hoặc mật khẩu";
+                header("Location: index.php");
                 exit;
             }
         } else {
@@ -34,12 +34,16 @@ class AuthController
 
     public function register()
     {
-
+        $userRepo = new UserRepository();
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $name     = $_POST['name'] ?? '';
             $email    = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
-
+            if (! empty($userRepo->findByEmail($email))) {
+                $_SESSION['register_error'] = 'Email đã tồn tại';
+                header("Location: index.php?c=auth&a=profileSetup");
+                exit;
+            }
             $birthDay   = $_POST['birthDay'] ?? '';
             $birthMonth = $_POST['birthMonth'] ?? '';
             $birthYear  = $_POST['birthYear'] ?? '';
@@ -84,10 +88,11 @@ class AuthController
             if (! empty($_POST['interests'])) {
                 $userRepo->saveUserInterests((int) $userId, $_POST['interests']);
             }
-
+            $_SESSION['register_success'] = 'Đăng ký thành công! Bạn có thể đăng nhập.';
             header("Location: index.php?c=home&a=index");
             exit;
         } else {
+            $_SESSION['register_error'] = 'Đăng ký thất bại, vui lòng thử lại.';
             header("Location: index.php?c=auth&a=profileSetup");
             exit;
         }

@@ -44,7 +44,26 @@
                 </div>
 
                 <div class="modal-body">
-                    <!-- Form đăng nhập sẽ gửi tới UserController@login -->
+                    <?php
+                        $showLoginModal      = false;
+                        $showRegisterSuccess = false;
+
+                        if (! empty($_SESSION['login_error'])):
+                            $showLoginModal = true;
+                        ?>
+	                    <div class="alert alert-danger">
+	                        <?php echo $_SESSION['login_error']; ?>
+	                    </div>
+	                    <?php endif;
+                            if (! empty($_SESSION['register_success'])):
+                                $showRegisterSuccess = true;
+                            ?>
+	                    <div class="alert alert-success text-center">
+	                        <?php echo $_SESSION['register_success']; ?>
+	                    </div>
+	                    <?php
+                            endif;
+                        ?>
                     <form id="loginForm" method="POST" action="?c=auth&a=login">
                         <div class="form-group">
                             <label for="loginEmail">Email</label>
@@ -66,5 +85,28 @@
     </div>
 
 </body>
+<script>
+<?php
+    $shouldOpenLogin = false;
+    if (! empty($showLoginModal) && $showLoginModal === true) {
+        $shouldOpenLogin = true;
+    }
+
+    if (! empty($showRegisterSuccess) && $showRegisterSuccess === true) {
+        $shouldOpenLogin = true;
+    }
+?>
+<?php if ($shouldOpenLogin): ?>
+$(document).ready(function() {
+    $('#loginModal').modal('show');
+});
+<?php endif; ?>
+</script>
+
+
+<?php
+    unset($_SESSION['login_error']);
+    unset($_SESSION['register_success']);
+?>
 
 </html>
