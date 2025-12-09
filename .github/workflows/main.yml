@@ -26,3 +26,5 @@ jobs:
             .github/**
             html/**
             site/public/vendor/**
+            site/upload/**
+            .gitignore
