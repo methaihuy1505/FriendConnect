@@ -21,7 +21,7 @@
                         <?php echo htmlspecialchars($owner->getName()); ?>,
                         <?php echo date_diff(date_create($owner->getBirthDate()), date_create('today'))->y ?>
                     </h5>
-                    <div class="mb-2">Sở thích:
+                    <div class="mb-2">
                         <h5 class="mt-2">
                             <?php echo $title ?>
                         </h5>

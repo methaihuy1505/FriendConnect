@@ -24,7 +24,7 @@ class DashboardController
         // Nhiều người theo dõi nhất
         $topFollowers = $repo->getTopUsersByFollowers();
         // Được thử thách nhiều nhất
-        $topChallenged = $repo->getTopUsersByChallenges();
+        $topChallenged = $repo->getTopChallengeOwnersByAttempts();
         // Lấy danh sách người mà currentUser đang theo dõi
         $followingUsers = $currentUser->getFollowing();
         // Lấy danh sách người đang theo dõi currentUser

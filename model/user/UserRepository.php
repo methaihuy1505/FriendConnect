@@ -166,17 +166,16 @@ class UserRepository
         return array_map(function ($m) {return $m['user'];}, $matched);
     }
 
-    public function getTopUsersByChallenges(?int $limit = null)
+    public function getTopChallengeOwnersByAttempts(?int $limit = null)
     {
         global $pdo;
-        $users = [];
-
         $sql = "
-        SELECT u.*, COUNT(c.id) AS challenge_count
-        FROM users u
-        LEFT JOIN challenge_attempts c ON u.id = c.user_id
-        GROUP BY u.id
-        ORDER BY challenge_count DESC
+        SELECT u.*, ch.id AS challenge_id, ch.title AS challenge_title, SUM(ca.attempt_count) AS total_attempts
+        FROM challenges ch
+        INNER JOIN challenge_attempts ca ON ch.id = ca.challenge_id
+        INNER JOIN users u ON u.id = ch.creator_id
+        GROUP BY ch.id
+        ORDER BY total_attempts DESC
     ";
 
         if ($limit !== null) {
@@ -184,22 +183,23 @@ class UserRepository
         }
 
         $stmt = $pdo->prepare($sql);
-
         if ($limit !== null) {
             $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         }
-
         $stmt->execute();
+
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($rows) {
-            foreach ($rows as $row) {
-                $user    = $this->mapRowToUser($row);
-                $users[] = $user;
-            }
+        $result = [];
+        foreach ($rows as $row) {
+            $result[] = [
+                'user'            => $this->mapRowToUser($row),
+                'challenge_id'    => $row['challenge_id'],
+                'challenge_title' => $row['challenge_title'],
+                'total_attempts'  => $row['total_attempts'],
+            ];
         }
-
-        return $users;
+        return $result;
     }
 
     public function getTopUsersByFollowers(?int $limit = null)

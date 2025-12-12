@@ -55,7 +55,7 @@
 
                 <div class="text-end mt-3">
                     <button type="submit" class="btn btn-success mb-3">Hoàn thành</button>
-                    <button type="button" class="btn btn-secondary back-btn mb-3">Quay về</button>
+                    <button type="button" class="btn btn-secondary back-btn mb-3">Quay về danh sách</button>
                 </div>
             </form>
         </div>
