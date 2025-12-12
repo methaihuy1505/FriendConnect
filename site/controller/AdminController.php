@@ -45,11 +45,18 @@ class AdminController
 
             $userRepo = new UserRepository();
             $user     = $userRepo->find($id);
-            $user->setName($name);
-            $user->setEmail($email);
-            $user->setRole($role);
 
-            $userRepo->update($user);
+            if ($user) {
+                $user->setName($name);
+                $user->setEmail($email);
+                $user->setRole($role);
+
+                $userRepo->update($user);
+                $_SESSION['success'] = "Cập nhật user thành công";
+            } else {
+                $_SESSION['error'] = "User không tồn tại";
+            }
+
             header("Location: index.php?c=admin");
             exit;
         }
