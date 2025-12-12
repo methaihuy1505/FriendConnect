@@ -10,7 +10,10 @@
 
             <div class="user-scroll">
                 <?php foreach ($attempts as $attempt): ?>
-                <?php $owner = $repo->findByChallengeId($attempt->getChallengeId()); ?>
+                <?php $owner = $repo->findByChallengeId($attempt->getChallengeId());
+                        $title                       = $challengeRepo->find($attempt->getChallengeId())->getTitle();
+                        $totalQuest                  = count($questionRepo->findByChallenge($attempt->getChallengeId()));
+                    ?>
                 <div class="user-card">
                     <img src="upload/<?php echo htmlspecialchars($owner->getAvatarUrl() ?: 'default.png'); ?>"
                         alt="User" />
@@ -18,7 +21,11 @@
                         <?php echo htmlspecialchars($owner->getName()); ?>,
                         <?php echo date_diff(date_create($owner->getBirthDate()), date_create('today'))->y ?>
                     </h5>
-
+                    <div class="mb-2">Sở thích:
+                        <h5 class="mt-2">
+                            <?php echo $title ?>
+                        </h5>
+                    </div>
                     <!-- Sở thích -->
                     <?php
                         $interests = $owner->getInterests();
@@ -40,21 +47,23 @@
 
                     <!-- Thông tin thử thách -->
                     <div class="challenge-info mb-2">
-                        <span class="badge bg-success me-2">Điểm:                                                                     <?php echo $attempt->getScore(); ?></span>
+                        <span class="badge bg-success me-2">Điểm:
+                            <?php echo $attempt->getScore(); ?>/<?php echo $totalQuest ?></span>
                         <span class="badge bg-info">Số lần thử thách:                                                                             <?php echo $attempt->getAttemptCount(); ?></span>
                     </div>
 
                     <!-- Nút hành động -->
                     <div class="actions">
-                        <form action="index.php?c=follow&a=toggle" method="POST" class="d-inline">
+                        <form action="?c=follow&a=toggle" method="POST" class="d-inline">
                             <input type="hidden" name="id" value="<?php echo $owner->getId(); ?>">
                             <button type="submit" class="btn btn-outline-primary btn-sm">
                                 <?php echo $owner->isFollowedBy($currentUser) ? 'Hủy theo dõi' : 'Theo dõi'; ?>
                             </button>
                         </form>
-                        <a href="index.php?c=challenge&user=<?php echo $owner->getId(); ?>"
-                            class="btn btn-challenge btn-sm">Thử thách</a>
-                        <a href="index.php?c=user&a=profile&id=<?php echo $owner->getId(); ?>"
+                        <a href="?c=challenge&user=<?php echo $owner->getId(); ?>&id=<?php echo $attempt->getChallengeId(); ?>"
+                            class="btn btn-challenge btn-sm">Thử thách lại</a>
+
+                        <a href="?c=user&a=profile&id=<?php echo $owner->getId(); ?>"
                             class="btn btn-secondary btn-sm">Xem profile</a>
                     </div>
                 </div>

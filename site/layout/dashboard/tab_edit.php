@@ -2,7 +2,7 @@
     <h3>Chỉnh sửa hồ sơ</h3>
     <div class="profile-form profile-form-inner">
         <div class="container ">
-            <form id="editProfileForm" action="index.php?c=user&a=update" method="POST" enctype="multipart/form-data"
+            <form id="editProfileForm" action="?c=user&a=update" method="POST" enctype="multipart/form-data"
                 class="mt-3">
                 <?php $prefix = 'edit';
                 $user                         = $currentUser; ?>

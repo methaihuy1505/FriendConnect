@@ -12,6 +12,7 @@ class User
     protected $relationshipIntent;
     protected $avatarUrl;
     protected $createdAt;
+    protected $role;
 
     public function __construct(
         $id,
@@ -24,7 +25,8 @@ class User
         $interestedIn,
         $relationshipIntent,
         $avatarUrl,
-        $createdAt
+        $createdAt,
+        $role = "user"
     ) {
         $this->id                 = $id;
         $this->name               = $name;
@@ -37,6 +39,7 @@ class User
         $this->relationshipIntent = $relationshipIntent;
         $this->avatarUrl          = $avatarUrl;
         $this->createdAt          = $createdAt;
+        $this->role               = $role;
     }
 
     // Getter
@@ -62,6 +65,8 @@ class User
     {return $this->avatarUrl;}
     public function getCreatedAt()
     {return $this->createdAt;}
+    public function getRole()
+    {return $this->role;}
 
     // Setter
     public function setName($name)
@@ -82,6 +87,8 @@ class User
     {$this->relationshipIntent = $intent;return $this;}
     public function setAvatarUrl($avatarUrl)
     {$this->avatarUrl = $avatarUrl;return $this;}
+    public function setRole($role)
+    {$this->role = $role;return $this;}
     public function getInterests()
     {
         $repo = new InterestRepository();

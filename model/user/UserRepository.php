@@ -242,9 +242,9 @@ class UserRepository
     {
         global $pdo;
         $stmt = $pdo->prepare("
-            INSERT INTO users (name, email, password_hash, birth_date, gender, orientation, interested_in, relationship_intent, avatar_url)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ");
+        INSERT INTO users (name, email, password_hash, birth_date, gender, orientation, interested_in, relationship_intent, avatar_url, role)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ");
         $stmt->execute([
             $user->getName(),
             $user->getEmail(),
@@ -255,10 +255,12 @@ class UserRepository
             $user->getInterestedIn(),
             $user->getRelationshipIntent(),
             $user->getAvatarUrl(),
+            $user->getRole(), // thêm role
         ]);
 
         return $pdo->lastInsertId();
     }
+
     public function saveUserInterests(int $userId, array $interestIds): void
     {
         global $pdo;
@@ -320,11 +322,8 @@ class UserRepository
             'interested_in'       => $user->getInterestedIn(),
             'relationship_intent' => $user->getRelationshipIntent(),
             'avatar_url'          => $user->getAvatarUrl(),
+            'role'                => $user->getRole(),
         ];
-        if ($user->getAvatarUrl()) {
-            $fields['avatar_url'] = $user->getAvatarUrl();
-        }
-
         if ($user->getPasswordHash()) {
             $fields['password_hash'] = $user->getPasswordHash();
         }
@@ -375,7 +374,8 @@ class UserRepository
             $row['interested_in'],
             $row['relationship_intent'],
             $row['avatar_url'],
-            $row['created_at']
+            $row['created_at'],
+            $row['role']
         );
     }
 }

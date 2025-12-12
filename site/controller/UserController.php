@@ -72,6 +72,42 @@ class UserController
         }
         header("Location: index.php?c=dashboard#edit");
     }
+    public function updatePass()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $currentPassword = $_POST["currentPassword"] ?? '';
+            $newPassword     = $_POST["newPassword"] ?? '';
+            $confirmPassword = $_POST["confirmPassword"] ?? '';
+
+            $userRepo = new UserRepository();
+            $user     = $userRepo->find($_SESSION['user_id']);
+
+            // Kiểm tra mật khẩu hiện tại
+            if (! $user || ! password_verify($currentPassword, $user->getPasswordHash())) {
+                $_SESSION['error'] = "Mật khẩu hiện tại không đúng";
+                header("Location: index.php?c=dashboard#change-pass");
+                exit;
+            }
+
+            // Kiểm tra mật khẩu mới trùng khớp
+            if ($newPassword !== $confirmPassword) {
+                $_SESSION['error'] = "Mật khẩu mới không trùng khớp";
+                header("Location: index.php?c=dashboard#change-pass");
+                exit;
+            }
+
+            // Hash mật khẩu mới và update
+            $user->setPasswordHash(password_hash($newPassword, PASSWORD_DEFAULT));
+            $userRepo->updatePassword($user);
+
+            $_SESSION['success'] = "Đổi mật khẩu thành công";
+            header("Location: index.php?c=dashboard#change-pass");
+            exit;
+        } else {
+            header("Location: index.php?c=home");
+            exit;
+        }
+    }
     public function profile()
     {
         if (empty($_SESSION['user_id'])) {

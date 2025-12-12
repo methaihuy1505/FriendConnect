@@ -19,6 +19,7 @@ class AuthController
 
             if ($user && password_verify($password, $user->getPasswordHash())) {
                 $_SESSION['user_id'] = $user->getId();
+                $_SESSION['role']    = $user->getRole();
                 header("Location: index.php?c=dashboard");
                 exit;
             } else {
@@ -100,7 +101,6 @@ class AuthController
 
     public function logout()
     {
-        session_start();
         session_unset();
         session_destroy();
 

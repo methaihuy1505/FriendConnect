@@ -36,15 +36,15 @@
                         <?php endif; ?>
                     </div>
                     <div class="actions">
-                        <form action="index.php?c=follow&a=toggle" method="POST" class="d-inline">
+                        <form action="?c=follow&a=toggle" method="POST" class="d-inline">
                             <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
                             <button type="submit" class="btn btn-outline-primary btn-sm">
                                 <?php echo $user->isFollowedBy($currentUser) ? 'Hủy theo dõi' : 'Theo dõi'; ?>
                             </button>
                         </form>
-                        <a href="index.php?c=challenge&user=<?php echo $user->getId(); ?>"
-                            class="btn btn-challenge btn-sm">Thử thách</a>
-                        <a href="index.php?c=user&a=profile&id=<?php echo $user->getId(); ?>"
+                        <a href="?c=challenge&user=<?php echo $user->getId(); ?>" class="btn btn-challenge btn-sm">Thử
+                            thách</a>
+                        <a href="?c=user&a=profile&id=<?php echo $user->getId(); ?>"
                             class="btn btn-secondary btn-sm">Xem profile</a>
                     </div>
                 </div>

@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="actions">
-                        <form action="index.php?c=follow&a=toggle" method="POST" class="d-inline">
+                        <form action="?c=follow&a=toggle" method="POST" class="d-inline">
                             <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
                             <button type="submit" class="btn btn-outline-primary btn-sm">
                                 <?php echo $user->isFollowedBy($currentUser) ? 'Hủy theo dõi' : 'Theo dõi'; ?>
@@ -192,7 +192,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="actions">
-                        <form action="index.php?c=follow&a=toggle" method="POST" class="d-inline">
+                        <form action="?c=follow&a=toggle" method="POST" class="d-inline">
                             <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
                             <button type="submit" class="btn btn-outline-primary btn-sm">
                                 <?php echo $user->isFollowedBy($currentUser) ? 'Hủy theo dõi' : 'Theo dõi'; ?>
@@ -250,7 +250,7 @@
                     </div>
                     <p>Số followers:                                       <?php echo $user->getFollowerCount(); ?></p>
                     <div class="actions">
-                        <form action="index.php?c=follow&a=toggle" method="POST" class="d-inline">
+                        <form action="?c=follow&a=toggle" method="POST" class="d-inline">
                             <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
                             <button type="submit" class="btn btn-outline-primary btn-sm">
                                 <?php echo $user->isFollowedBy($currentUser) ? 'Hủy theo dõi' : 'Theo dõi'; ?>
@@ -308,7 +308,7 @@
                     </div>
                     <p>Số lần thử thách:                                                <?php echo $user->challengeCount ?? 0; ?></p>
                     <div class="actions">
-                        <form action="index.php?c=follow&a=toggle" method="POST" class="d-inline">
+                        <form action="?c=follow&a=toggle" method="POST" class="d-inline">
                             <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
                             <button type="submit" class="btn btn-outline-primary btn-sm">
                                 <?php echo $user->isFollowedBy($currentUser) ? 'Hủy theo dõi' : 'Theo dõi'; ?>

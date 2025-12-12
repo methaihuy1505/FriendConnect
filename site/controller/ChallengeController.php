@@ -6,21 +6,29 @@ class ChallengeController
     {
         if (empty($_SESSION['user_id'])) {
             header("Location: index.php");
+            exit;
         }
+
         $challengeRepo        = new ChallengeRepository();
         $questionRepo         = new QuestionRepository();
         $challengeAttemptRepo = new ChallengeAttemptRepository();
         $optionRepo           = new OptionRepository();
         $userRepo             = new UserRepository();
-        $userId               = $_GET['user'] ?? null;
-        $user                 = $userRepo->find($userId);
-        $challenges           = $challengeRepo->findByCreator($userId);
+
+        $userId      = $_GET['user'] ?? null;
+        $challengeId = $_GET['id'] ?? null;
+
+        $user       = $userRepo->find($userId);
+        $challenges = $challengeRepo->findByCreator($userId);
+
         require "view/challenge/index.php";
     }
+
     public function submit()
     {
+
         if (empty($_POST['answers']) || empty($_POST['challenge_id'])) {
-            header("Location: index.php?c=challenge");
+            header("Location: index.php?c=dashboard");
             exit;
         }
 
@@ -32,14 +40,16 @@ class ChallengeController
         $attemptRepo = new ChallengeAttemptRepository();
 
         // Tính điểm
-        $score = 0;
+        $score        = 0;
+        $wrongAnswers = [];
         foreach ($answers as $questionId => $optionIndex) {
             $correctOption = $optionRepo->findCorrectByQuestion($questionId);
-            if ($correctOption && $correctOption->getId() == $optionIndex) {
+            if (! $correctOption || $correctOption->getId() != $optionIndex) {
+                $wrongAnswers[] = $questionId;
+            } else {
                 $score++;
             }
         }
-
         // check attempt cũ
         $lastAttempt = $attemptRepo->findLastAttempt($challengeId, $userId);
 
@@ -54,8 +64,28 @@ class ChallengeController
             );
         }
 
-        header("Location: index.php?c=dashboard#challenged");
+        $_SESSION['last_result'] = [
+            'challenge_id' => $challengeId,
+            'score'        => $score,
+            'wrong'        => $wrongAnswers,
+        ];
+
+        header("Location: index.php?c=challenge&a=result&id=" . $challengeId);
         exit;
+    }
+    public function result()
+    {
+        $questionRepo  = new QuestionRepository();
+        $optionRepo    = new OptionRepository();
+        $challengeRepo = new ChallengeRepository();
+
+        $challengeId = (int) ($_GET['id'] ?? 0);
+        $challenge   = $challengeRepo->find($challengeId);
+        $questions   = $questionRepo->findByChallenge($challengeId);
+
+        $lastResult = $_SESSION['last_result'] ?? null;
+
+        require "view/challenge/result.php";
     }
 
     public function save()

@@ -15,11 +15,8 @@
                     <hr />
                     <ul class="nav flex-column nav-pills" id="sidebarTabs">
                         <li class="nav-item">
-                            <a class="nav-link                                               <?php echo empty($challenge) ? 'active' : ''; ?>" data-toggle="pill"
-                                href="#explore">Khám phá</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" href="#edit">Chỉnh sửa hồ sơ</a>
+                            <a class="nav-link                                                                                                                                                                                                                                                                                     <?php echo empty($challenge) ? 'active' : ''; ?>"
+                                data-toggle="pill" href="#explore">Khám phá</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="pill" href="#following">Đang theo dõi</a>
@@ -31,8 +28,8 @@
                             <a class="nav-link" data-toggle="pill" href="#challenged">Đã thử thách</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link                                               <?php echo ! empty($challenge) ? 'active' : ''; ?>" data-toggle="pill"
-                                href="#create">Thiết kế thử thách</a>
+                            <a class="nav-link                                                                                                                                                                                                                                                                                     <?php echo ! empty($challenge) ? 'active' : ''; ?>"
+                                data-toggle="pill" href="#create">Thiết kế thử thách</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="pill" href="#my-challenges">Thử thách của tôi</a>
@@ -41,6 +38,17 @@
                             <a class="nav-link" href="?c=user&a=profile&id=<?php echo $currentUser->getId(); ?>">Hồ
                                 sơ của tôi</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#edit">Chỉnh sửa hồ sơ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#change-pass">Đổi mật khẩu</a>
+                        </li>
+                        <?php if ($_SESSION['role'] == "admin"): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="?c=admin">Admin</a>
+                        </li>
+                        <?php endif; ?>
                         <li class="nav-item">
                             <a class="nav-link" href="?c=auth&a=logout">Đăng xuất</a>
                         </li>
@@ -53,6 +61,8 @@
                         <?php require "layout/dashboard/tab_explore.php"?>
                         <!-- Edit profile tab -->
                         <?php require "layout/dashboard/tab_edit.php"?>
+                        <!-- Change Password -->
+                        <?php require "layout/dashboard/tab_change_pass.php"?>
                         <!-- Following tab -->
                         <?php require "layout/dashboard/tab_following.php"?>
                         <!-- Followerstab -->
