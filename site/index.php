@@ -1,7 +1,12 @@
 <?php
-if ($_SERVER['HTTP_HOST'] === 'localhost') {
+if (getenv('DOCKER') === 'true') {
+    // Chạy trong Docker
+    require "../config.docker.php";
+} elseif ($_SERVER['HTTP_HOST'] === 'localhost') {
+    // Chạy trên XAMPP / local
     require "../config.local.php";
 } else {
+    // Chạy trên server production
     require "../config.prod.php";
 }
 
