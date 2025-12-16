@@ -16,7 +16,7 @@
                 <h2>BÁO CÁO TRANG CÁ NHÂN</h2>
             </div>
             <div class="card-body">
-                <h4 class="card-title text-center">Giới thiệu</h4>
+                <h4 class="card-title text-center">Test Deploy Server</h4>
                 <p class="card-text text-center">
                     Kính chào Thầy,<br>
                     Em xin giới thiệu trang cá nhân của mình. Trang này nhằm tổng hợp các bài thực hành tại lớp
