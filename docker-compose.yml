@@ -20,8 +20,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: friend_connect
-      MYSQL_USER: root
-      MYSQL_PASSWORD: ""
+      MYSQL_USER: fc_user
+      MYSQL_PASSWORD: fc_pass
     ports:
       - "3306:3306"
     volumes:
