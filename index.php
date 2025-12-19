@@ -13,7 +13,7 @@
     <div class="container mt-5">
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white text-center">
-                <h2>BÁO CÁO TRANG CÁ NHÂN</h2>
+                <h2>Test Deploy Server by github action</h2>
             </div>
             <div class="card-body">
                 <h4 class="card-title text-center">Báo cáo </h4>
