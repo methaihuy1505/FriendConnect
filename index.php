@@ -13,26 +13,26 @@
     <div class="container mt-5">
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white text-center">
-                <!-- <h2>BÁO CÁO TRANG CÁ NHÂN</h2> -->
+                <h2>BÁO CÁO TRANG CÁ NHÂN</h2>
             </div>
             <div class="card-body">
-                <h4 class="card-title text-center">Mè Thái Huy - Thứ 4 ca 2 </h4>
-                <!-- <p class="card-text text-center">
+                <h4 class="card-title text-center">Báo cáo </h4>
+                <p class="card-text text-center">
                     Kính chào Thầy,<br>
                     Em xin giới thiệu trang cá nhân của mình. Trang này nhằm tổng hợp các bài thực hành tại lớp
                     cũng như đồ án Friend Connect mà em đã thực hiện.
-                </p> -->
+                </p>
 
                 <div class="d-flex justify-content-center mt-4">
                     <a href="TH" class="btn btn-success btn-lg mx-3">Các Lab Thực Hành</a>
                     <a href="site" class="btn btn-info btn-lg mx-3">Đồ Án Friend Connect</a>
                 </div>
             </div>
-            <!-- <div class="card-footer text-muted text-center">
+            <div class="card-footer text-muted text-center">
                 Họ tên: Mè Thái Huy<br>
                 MSSV: DH52200775 <br>
                 Lớp: D22_TH13
-            </div> -->
+            </div>
         </div>
     </div>
 </body>

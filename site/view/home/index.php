@@ -3,8 +3,7 @@
 <body class="homepage">
     <div class="hero">
 
-        <!-- <h1>Chào mừng đến với ứng dụng kết nối</h1> -->
-        <h1>Mè Thái Huy thứ 4 ca 2</h1>
+        <h1>Chào mừng đến với ứng dụng kết nối</h1>
         <?php if (! empty($_SESSION["user_id"])) {?>
         <a href="?c=dashboard" class="btn btn-create">+ Kết nối ngay</a>
         <?php } else {?>
